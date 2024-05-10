@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"solutions/datastructures"
 )
 
@@ -62,19 +61,30 @@ func main() {
 	// 	fmt.Println(q.Dequeue())
 	// }
 	
-	t := datastructures.NewBinaryTree()
-	build := []int{5, 10, 9}
+	// t := datastructures.NewBinaryTree()
+	// build := []int{5, 10, 9}
+	// for _, v := range build {
+	// 	t.Insert(v)
+	// }
+
+	// fmt.Println("\ntree:")
+	// fmt.Println(t.Root)
+	// fmt.Println(t.Root.L, t.Root.R)
+
+	// fmt.Println("\nsearch")
+	// fmt.Println(t.Search(500))
+	// fmt.Println(t.Search(10))
+	// fmt.Println(t.Search(9))
+	// fmt.Println(t.Search(5))
+
+	g := datastructures.NewGraph()
+	build := []int{1,2,3,4,5,6}
 	for _, v := range build {
-		t.Insert(v)
+		g.AddVertex(v)
 	}
 
-	fmt.Println("\ntree:")
-	fmt.Println(t.Root)
-	fmt.Println(t.Root.L, t.Root.R)
+	g.AddEdge(1, 2)
+	g.AddEdge(3, 1)
 
-	fmt.Println("\nsearch")
-	fmt.Println(t.Search(500))
-	fmt.Println(t.Search(10))
-	fmt.Println(t.Search(9))
-	fmt.Println(t.Search(5))
+	g.Print()
 }
