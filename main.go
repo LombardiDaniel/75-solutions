@@ -63,7 +63,7 @@ func main() {
 	// }
 	
 	t := datastructures.NewBinaryTree()
-	build := []int{5, 10}
+	build := []int{5, 10, 9}
 	for _, v := range build {
 		t.Insert(v)
 	}

@@ -29,11 +29,10 @@ func insertOnNode(node *treeNode, v int) *treeNode {
 		return newNode
 	}
 
-	fmt.Println("starting recursive")
 	if v < node.Val { // go left
-		node = insertOnNode(node.L, v)
+		node.L = insertOnNode(node.L, v)
 	} else { // go right
-		node = insertOnNode(node.R, v)
+		node.R = insertOnNode(node.R, v)
 	}
 
 	return node
