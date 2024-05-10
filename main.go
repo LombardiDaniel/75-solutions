@@ -72,4 +72,9 @@ func main() {
 	fmt.Println(t.Root)
 	fmt.Println(t.Root.L, t.Root.R)
 
+	fmt.Println("\nsearch")
+	fmt.Println(t.Search(500))
+	fmt.Println(t.Search(10))
+	fmt.Println(t.Search(9))
+	fmt.Println(t.Search(5))
 }
