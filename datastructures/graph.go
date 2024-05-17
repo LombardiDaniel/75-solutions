@@ -14,11 +14,11 @@ type Vertex struct {
 func NewGraph() GraphAdjacencyListImpl {
 	return GraphAdjacencyListImpl{
 		Vertices: []*Vertex{},
-	} 
+	}
 }
 
-func (g *GraphAdjacencyListImpl) containsKey(key int) bool {
-	for _, v := range g.Vertices {
+func containsKey(verices []*Vertex, key int) bool {
+	for _, v := range verices {
 		if v.Key == key {
 			return true
 		}
@@ -27,9 +27,19 @@ func (g *GraphAdjacencyListImpl) containsKey(key int) bool {
 	return false
 }
 
+func (g *GraphAdjacencyListImpl) GetVertex(key int) *Vertex {
+	for _, v := range g.Vertices {
+		if v.Key == key {
+			return v
+		}
+	}
+
+	return nil
+}
+
 func (g *GraphAdjacencyListImpl) AddVertex(key int) {
 
-	if g.containsKey(key) {
+	if containsKey(g.Vertices, key) {
 		fmt.Println("CANNOT INSERT DUPLICATE KEY!!!")
 		return
 	}
@@ -41,15 +51,17 @@ func (g *GraphAdjacencyListImpl) AddVertex(key int) {
 }
 
 func (g *GraphAdjacencyListImpl) AddEdge(from int, to int) {
-	var vertexFrom *Vertex
-	var vertexTo *Vertex
-	for _, v := range g.Vertices {
-		if v.Key == from {
-			vertexFrom = v
-		}
-		if v.Key == to {
-			vertexTo = v
-		}
+	vertexFrom := g.GetVertex(from)
+	vertexTo := g.GetVertex(to)
+
+	if vertexFrom == nil || vertexTo == nil {
+		fmt.Printf("Invalid edge (%d -> %d)\n", from, to)
+		return
+	}
+
+	if containsKey(vertexFrom.Adjacent, to) {
+		fmt.Printf("Edge (%d -> %d) already exists\n", from, to)
+		return
 	}
 
 	vertexFrom.Adjacent = append(vertexFrom.Adjacent, vertexTo)
