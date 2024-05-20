@@ -76,3 +76,57 @@ func (g *GraphAdjacencyListImpl) Print() {
 	}
 	fmt.Println("")
 }
+
+// func (g *GraphAdjacencyListImpl) DepthFirstSearch(start int, end int) {
+	
+// 	var currVertex *Vertex
+// 	for _, v := range g.Vertices {
+// 		if v.Key == start {
+// 			currVertex = v
+// 			break
+// 		}
+// 	}
+
+// 	for _, v := range currVertex.Adjacent {
+
+// 	}
+// }
+
+func (g *GraphAdjacencyListImpl) NumPaths(from int, to int) int {
+
+	var start *Vertex
+	var end *Vertex
+	for _, v := range g.Vertices {
+		if v.Key == from {
+			start = v
+		}
+		if v.Key == to {
+			end = v
+		}
+	}
+
+	if start == nil || end == nil {
+		return 0
+	}
+
+	visited := make(map[int]bool)
+	return numPaths(start, end, visited)
+}
+
+func numPaths(curr *Vertex, tgt *Vertex, visitedKeys map[int]bool) int {
+	if curr == tgt {
+		return 1
+	}
+
+	visitedKeys[curr.Key] = true
+	ret := 0
+	for _, v := range curr.Adjacent {
+		visited, exists := visitedKeys[v.Key]
+		if !exists || !visited {
+			ret += numPaths(v, tgt, visitedKeys)
+		}
+	}
+	visitedKeys[curr.Key] = false
+
+	return ret
+}
