@@ -130,3 +130,26 @@ func numPaths(curr *Vertex, tgt *Vertex, visitedKeys map[int]bool) int {
 
 	return ret
 }
+
+func LargestPath(arr []int) int {
+
+	LISs := []int{}
+	LISs = append(LISs, arr...)
+
+	for i := len(arr) - 1; i >= 0; i-- {
+		for j := i + 1; j < len(arr); j++ {
+			if arr[i] < arr[j] {
+				LISs[i] = max(LISs[i], 1 + LISs[j])
+			}
+		}
+	}
+
+	maxVal := 1
+	for _, v := range LISs {
+		if v > maxVal {
+			maxVal = v
+		}
+	}
+
+	return maxVal
+}

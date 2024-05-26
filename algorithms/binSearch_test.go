@@ -17,4 +17,9 @@ func TestBinSearch(t *testing.T) {
 	if idx != 9 {
 		t.Errorf("found 99 @ idx=%d", idx)
 	}
+
+	idx = algorithms.BinarySearch(sortedArr, 1200)
+	if idx != 10 {
+		t.Errorf("found 99 @ idx=%d", idx)
+	}
 }
