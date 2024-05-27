@@ -98,4 +98,5 @@ func main() {
 	g.Print()
 
 	fmt.Println(g.NumPaths(0, 6))
+	fmt.Println(g.DepthFirstSearch(1))
 }

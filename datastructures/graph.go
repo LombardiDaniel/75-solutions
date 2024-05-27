@@ -77,20 +77,30 @@ func (g *GraphAdjacencyListImpl) Print() {
 	fmt.Println("")
 }
 
-// func (g *GraphAdjacencyListImpl) DepthFirstSearch(start int, end int) {
+func (g *GraphAdjacencyListImpl) DepthFirstSearch(val int) *Vertex {
 	
-// 	var currVertex *Vertex
-// 	for _, v := range g.Vertices {
-// 		if v.Key == start {
-// 			currVertex = v
-// 			break
-// 		}
-// 	}
+	visited := make(map[*Vertex]bool)
+	for _, v := range g.Vertices {
+		vertex := exploreVertex(v, val, &visited)
+		if vertex != nil {
+			return vertex
+		}
+	}
+	return nil
+}
 
-// 	for _, v := range currVertex.Adjacent {
+func exploreVertex(vertex *Vertex, val int, visited *map[*Vertex]bool) *Vertex {
+	if vertex.Key == val {
+		return vertex
+	}
 
-// 	}
-// }
+	for _, v := range vertex.Adjacent {
+		(*visited)[v] = true
+		return exploreVertex(v, val, visited)
+	}
+
+	return nil
+}
 
 func (g *GraphAdjacencyListImpl) NumPaths(from int, to int) int {
 
