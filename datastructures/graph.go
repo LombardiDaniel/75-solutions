@@ -77,11 +77,43 @@ func (g *GraphAdjacencyListImpl) Print() {
 	fmt.Println("")
 }
 
+func (g *GraphAdjacencyListImpl) BreadthFirstSearch(val int) *Vertex {
+	// queue := make(chan *Vertex, len(g.Vertices))  // <- does NOT work correctly, the chan would need to be CLOSED
+	queue := NewQueue[*Vertex]()
+	visited := make(map[*Vertex]bool)
+
+	for _, vert := range g.Vertices {
+		queue.Enqueue(vert)
+		visited[vert] = true
+		v := *queue.Dequeue()
+		for v != nil {
+			visited[v] = true
+			if v.Key == val {
+				return v
+			}
+
+			for _, vv := range v.Adjacent {
+				if !visited[vv] {
+					queue.Enqueue(vv)
+				}
+			}
+
+			vPtr := queue.Dequeue()
+			if vPtr == nil {
+				return nil
+			}
+			v = *vPtr
+		}
+	}
+
+	return nil
+}
+
 func (g *GraphAdjacencyListImpl) DepthFirstSearch(val int) *Vertex {
 	
 	visited := make(map[*Vertex]bool)
 	for _, v := range g.Vertices {
-		vertex := exploreVertex(v, val, &visited)
+		vertex := exploreVertexDepth(v, val, &visited)
 		if vertex != nil {
 			return vertex
 		}
@@ -89,14 +121,14 @@ func (g *GraphAdjacencyListImpl) DepthFirstSearch(val int) *Vertex {
 	return nil
 }
 
-func exploreVertex(vertex *Vertex, val int, visited *map[*Vertex]bool) *Vertex {
+func exploreVertexDepth(vertex *Vertex, val int, visited *map[*Vertex]bool) *Vertex {
 	if vertex.Key == val {
 		return vertex
 	}
 
 	for _, v := range vertex.Adjacent {
 		(*visited)[v] = true
-		return exploreVertex(v, val, visited)
+		return exploreVertexDepth(v, val, visited)
 	}
 
 	return nil
