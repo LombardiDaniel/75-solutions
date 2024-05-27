@@ -1,12 +1,25 @@
 package algorithms
 
 func QuickSort(arr []int) []int {
-	return quickSortPivot(arr, 0, len(arr) - 1)
-}
-
-func quickSortPivot(arr []int, leftIdx int, rightIdx int) []int {
-	if leftIdx < rightIdx {
-		return arr[leftIdx:rightIdx]
+	if len(arr) < 2 {
+		return arr
 	}
-	return nil
+
+	pivot := arr[0]
+	left := []int{}
+	right := []int{}
+
+	for _, v := range arr[1:] {
+		if v <= pivot {
+			left = append(left, v)
+		} else {
+			right = append(right, v)
+		}
+	}
+
+	ret := []int{}
+	ret = append(ret, QuickSort(left)...)
+	ret = append(ret, pivot)
+	ret = append(ret, QuickSort(right)...)
+	return ret
 }
