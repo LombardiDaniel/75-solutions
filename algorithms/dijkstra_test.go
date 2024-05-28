@@ -28,7 +28,9 @@ func TestDijkstra(t *testing.T) {
 
 	graph.Print()
 
+	fmt.Printf("\n")
 	fmt.Println(graph.Dijkstra("A", "C"))
 	fmt.Println(graph.Dijkstra("A", "B"))
 	fmt.Println(graph.Dijkstra("A", "D"))
+	fmt.Println(graph.Dijkstra("A", "E"))
 }
