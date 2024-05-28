@@ -7,40 +7,19 @@ import (
 )
 
 func TestDijkstra(t *testing.T) {
+	// https://www.youtube.com/watch?v=_lHSawdgXpI
 	graph := algorithms.NewWeightedGraph[string]()
 
-	err := graph.AddVertex("A")
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-	err = graph.AddVertex("B")
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-	err = graph.AddVertex("C")
-	if err != nil {
-		t.Errorf(err.Error())
-	}
+	graph.AddVertex("A")
+	graph.AddVertex("B")
+	graph.AddVertex("C")
 	graph.AddVertex("D")
 	graph.AddVertex("E")
 
-	err = graph.AddEdge("A", "B", 4)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-	err = graph.AddEdge("A", "C", 2)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-	err = graph.AddEdge("B", "C", 3)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-	err = graph.AddEdge("C", "B", 1)
-	if err != nil {
-		t.Errorf(err.Error())
-	}
-
+	graph.AddEdge("A", "B", 4)
+	graph.AddEdge("A", "C", 2)
+	graph.AddEdge("B", "C", 3)
+	graph.AddEdge("C", "B", 1)
 	graph.AddEdge("C", "D", 4)
 	graph.AddEdge("B", "D", 2)
 	graph.AddEdge("B", "E", 3)
