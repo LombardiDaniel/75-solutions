@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func maxProfit(prices []int) int {
+func maxProfit0(prices []int) int {
     l := 0
 	r := 0
 	maxProfit := 0
@@ -27,7 +27,7 @@ func main() {
 	
 	arr := []int{7,1,5,3,6,4}
 
-	r := maxProfit(arr)
+	r := maxProfit0(arr)
 
 	fmt.Println(r)
 }

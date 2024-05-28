@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func maxProfit(prices []int) int {
+func maxProfit1(prices []int) int {
     l := 0
 	r := 0
 
