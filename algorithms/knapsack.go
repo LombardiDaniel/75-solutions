@@ -20,6 +20,11 @@ func NewKnapsack(maxWeight int) Knapsack {
 
 func (s *Knapsack) StealFrom(items []Item) []Item {
 	// bestVals := [][] []Item{}
+
+	// for _, v := range items {
+		
+	// }
+
 	return nil
 }
 
